@@ -8,9 +8,6 @@ Vue.component("prosNcons", {
 		};
 	},
 
-	created: function () {
-		console.log(this.prosNcons)
-	},
     watch: {
         '$store.state.prosNcons': function() {
 			this.prosNcons = this.$store.getters.prosNcons;
