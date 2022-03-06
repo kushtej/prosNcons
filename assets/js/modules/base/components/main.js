@@ -65,7 +65,7 @@ Vue.component("main-component", {
                     <div v-if="!prosNcons.pros || prosNcons.pros.length === 0" class="text-center mt-3">No Pros!🙄</div>
                 </div>
                 <div class="input-group mt-2 mb-3">
-                    <input type="text" v-model="pro" class="form-control" placeholder="Enter Pros here"
+                    <input type="text" v-model="pro" class="form-control" v-on:keyup.enter="addData('pros')" placeholder="Enter Pros here"
                         aria-label="Enter Pros here" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" @click="addData('pros')" id="button-addon2"><i class="fas fa-paper-plane"></i></button>
                 </div>
@@ -88,7 +88,7 @@ Vue.component("main-component", {
 
                 </div>
                 <div class="input-group mt-2 mb-3">
-                    <input type="text" v-model="con" class="form-control" placeholder="Enter Cons here"
+                    <input type="text" v-model="con" class="form-control" v-on:keyup.enter="addData('cons')" placeholder="Enter Cons here"
                         aria-label="Enter Cons here" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" @click="addData('cons')" id="button-addon2"><i class="fas fa-paper-plane"></i></button>
                 </div>
