@@ -1,0 +1,46 @@
+.modal-xxl {
+	max-width: 100%;
+	margin: 2%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 90vh;
+	display: flex;
+	position: fixed;
+	/* z-index: 100000; */
+	border-radius: 10px;
+}
+
+.customize-pnr {
+    font-size: large; 
+    background-color: #e2e3e5; 
+    color: black !important;
+    display: inline-block;
+    width : 20%
+}
+
+.toast-container {
+	z-index: 100001;
+}
+
+/* Overwriting BS-4 Modal close */
+.close {
+	float: right;
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	opacity: .5;
+}
+button.close {
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+}
+
+.modal-header .close {
+	padding: 1rem 1rem;
+	margin: -1rem -1rem -1rem auto;
+}
