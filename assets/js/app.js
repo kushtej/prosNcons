@@ -6,15 +6,11 @@ var store = new Vuex.Store({
 	mutations: {
         updateprosNcons (state,data) {
             state.prosNcons = data;
-            console.log("aaaaaa",data)
             localStorage.setItem("prosNcons", JSON.stringify(data));
         },
         updateGroupName (state,data) {
             state.groupName = data;
             state.prosNcons.lastSelectedGroup = data;
-            // console.log(state.prosNcons)
-            // this.$store.commit('updateprosNcons',state.prosNcons);
-
         }
     },
 	getters: {

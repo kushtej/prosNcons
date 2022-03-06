@@ -9,64 +9,33 @@ Vue.component("groups", {
 	},
     watch: {
 		groupName: function (val) {
-            // let groups = Object.keys(this.$store.state.prosNcons.groups);
-            // if(!groups.includes(val)){
-            //     this.options.push({ value: group, text: group });
-            // }
-            // console.log("Hiiiiiiii")
-            // this.groupName = this.$store.getters.prosNcons.lastSelectedGroup;
-            // console.log(this.groupName)
             this.$store.commit('updateGroupName',val);
 		},
+        
         '$store.state.groupName': function() {
             this.groupName = this.$store.getters.prosNcons.lastSelectedGroup;
-
-            console.log(this.groupName)
-
-
-            // let groups = Object.keys(this.$store.getters.prosNcons.groups);
-
             let optionValues = this.options.map(option => {
                 return option.value;
             })
-            
-
             if(!optionValues.includes(this.groupName)){
                 this.options.push({ value: this.groupName, text: this.groupName });
             }
         }
-        // options: function (val) {
-        //     this.$store.commit('updateGroupName',val);
-        // }
     },
-    computed: {
-		// options: function () {
-        //     let options = [{ value: null, text: 'Select a group!',disabled:true },];
-        //     if(this.$store.getters.prosNcons.groups){
-        //         let groups = Object.keys(this.$store.state.prosNcons.groups);
-        //         groups.forEach(group => {
-        //             options.push({ value: group, text: group });
-        //         });
-        //     }
-        //     console.log(options);
-		// 	return options;
-		// },
 
-        // groupName: function () {
-        //     return (this.$store.state.prosNcons.lastSelectedGroup) ? this.$store.state.prosNcons.lastSelectedGroup : null;
-        // }
-	},
 	created: function () {
-        // console.log(this.$store.getters.groupName);
         if(this.$store.getters.prosNcons.groups){
-            // console.log("sdf");
+            this.initialzeOptions();
+        }
+	},
+    methods: {
+        initialzeOptions(){
+            this.options.splice(1);
             let groups = Object.keys(this.$store.state.prosNcons.groups);
             groups.forEach(group => {
                 this.options.push({ value: group, text: group });
             });
-        }
-	},
-    methods: {
+        },
         addGroup() {
             let modalDiscription = {
                 title : "Add New Group",
@@ -75,6 +44,17 @@ Vue.component("groups", {
                 onsubmit  : "saveList"
             }
             this.$root.$emit('base::show::model',modalDiscription);   
+        },
+        removeGroup(){
+            let prosNcons = this.$store.getters.prosNcons;
+            delete prosNcons.groups[this.groupName];
+            prosNcons.lastSelectedGroup = null;
+            this.$store.commit('updateprosNcons',prosNcons);
+            this.$store.commit('updateGroupName',null);
+            
+            this.groupName = null;
+
+            this.initialzeOptions();
         }
     },
 	template:
@@ -85,7 +65,7 @@ Vue.component("groups", {
                 <b-form-select class="form-select" v-model="groupName" :options="options"></b-form-select>
             </div>
             <div class="col-sm-4">
-                <button v-if="groupName" type="button" class="btn btn-outline-primary">-</button>
+                <button v-if="groupName" type="button" @click="removeGroup()" class="btn btn-outline-primary">-</button>
             </div>
             <div class="col-sm-4">
                 <button style="float:right" type="button" @click="addGroup()" class="btn btn-outline-primary">+ Add Groups</button>
@@ -123,9 +103,7 @@ Vue.component("groupForm", {
             }
 
             let prosNcons = (this.$store.getters.prosNcons.groups) ? this.$store.getters.prosNcons : {groups:{}};
-            // console.log(this.$store.getters.prosNcons.groups)
 
-            // console.log(prosNcons)
             prosNcons["groups"][this.groupForm.name] = {
                 pros : [],
                 cons : []

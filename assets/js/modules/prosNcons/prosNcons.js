@@ -19,24 +19,8 @@ Vue.component("prosNcons", {
     },
 	computed: {
 		groupName: function () {
-			// console.log(this.$store.getters.groupName);
-			// console.log(this.prosNcons)
-			// this.prosNcons = this.$store.getters.prosNcons;
 			return this.$store.getters.groupName;
 		},
-
-
-		// prosNcons:  {
-		// 	get: function () {
-		// 		return this.$store.getters.prosNcons;
-		// 	},
-		// 	set: function (val) {
-		// 		// console.log(val);
-		// 		// this.prosNcons = val;
-		// 		this.$store.commit('updateprosNcons',val);
-		// 	}
-		// 	// return this.$store.getters.prosNcons;
-		// }
 	},
 
 	methods: {
@@ -48,22 +32,15 @@ Vue.component("prosNcons", {
 					text : text,
 				};
 				(this.prosNcons["groups"][this.groupName][type]) ? this.prosNcons["groups"][this.groupName][type].push(data) : this.prosNcons["groups"][this.groupName][type] = [data];
-
-				// this.updateData();
 				this.$store.commit('updateprosNcons',this.prosNcons);
 				this.clearInput(type);
 			}
 		},
 		deleteData(type,index){
 			this.prosNcons["groups"][this.groupName][type].splice(index, 1);
-			// this.updateData();
 			this.$store.commit('updateprosNcons',data);
 		},
-		// updateData(){
-		// 	// localStorage.setItem("prosNcons", JSON.stringify(this.prosNcons));
-		// 	this.$store.commit('updateData',data);
-
-		// },
+		
 		clearInput(type){
 			(type == "pros") ? this.pro = "" : this.con = "";
 		},

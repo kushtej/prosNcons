@@ -40,4 +40,3 @@ Vue.component('modal', {
         </b-modal>
     </div>`
 });
-// @ok.prevent="handleOk"
