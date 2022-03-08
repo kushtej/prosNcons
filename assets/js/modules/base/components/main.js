@@ -10,7 +10,7 @@ var mainComponent = Vue.component("main-component", {
 	`
 	<div class="main-component">
 
-		<deleteConformation></deleteConformation>
+		<deleteConfirmation></deleteConfirmation>
 		<modal></modal>
 		<notification></notification>
 

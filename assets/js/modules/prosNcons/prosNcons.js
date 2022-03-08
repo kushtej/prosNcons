@@ -29,13 +29,17 @@ Vue.component("prosNcons", {
 					text : text,
 				};
 				(this.prosNcons["groups"][this.groupName][type]) ? this.prosNcons["groups"][this.groupName][type].push(data) : this.prosNcons["groups"][this.groupName][type] = [data];
-				this.$store.commit('updateprosNcons',this.prosNcons);
 				this.clearInput(type);
+				this.updateData();
 			}
 		},
 		deleteData(type,index){
 			this.prosNcons["groups"][this.groupName][type].splice(index, 1);
-			this.$store.commit('updateprosNcons',data);
+			this.updateData();
+		},
+
+		updateData(){
+			this.$store.commit('updateprosNcons',this.prosNcons);
 		},
 		
 		clearInput(type){

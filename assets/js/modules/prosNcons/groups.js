@@ -43,18 +43,30 @@ Vue.component("groups", {
                 component : "groupForm",
                 onsubmit  : "saveList"
             }
-            this.$root.$emit('base::show::model',modalDiscription);   
+            this.$root.$emit('base::display::modal',modalDiscription);   
         },
         removeGroup(){
-            let prosNcons = this.$store.getters.prosNcons;
-            delete prosNcons.groups[this.groupName];
-            prosNcons.lastSelectedGroup = null;
-            this.$store.commit('updateprosNcons',prosNcons);
-            this.$store.commit('updateGroupName',null);
-            
-            this.groupName = null;
-
-            this.initialzeOptions();
+            self = this
+            let modalDiscription = {
+                title: "Delete Conformation",
+                size: "sm",
+                onConfirm: function () {
+                    let prosNcons = self.$store.getters.prosNcons;
+                    delete prosNcons.groups[self.groupName];
+                    prosNcons.lastSelectedGroup = null;
+                    self.$store.commit('updateprosNcons',prosNcons);
+                    self.$store.commit('updateGroupName',null);
+                    self.groupName = null;
+                    self.initialzeOptions();
+                    self.$root.$emit('trigger::notification', {
+                        type : "info",
+                        delay: 2000,
+                        message : "List successfully deleted!"
+                    });
+                    self.$root.$emit('bv::hide::modal', 'base::deleteConfirmation::modal');
+                }
+            }
+            this.$root.$emit('base::deleteConfirmation::modal', modalDiscription);
         }
     },
 	template:
@@ -118,8 +130,7 @@ Vue.component("groupForm", {
                 delay: 2000,
                 message : "List successfully created!"
             });
-
-
+            this.$root.$emit('bv::hide::modal','base::display::modal' );  
         },
 
     },

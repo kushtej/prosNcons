@@ -10,10 +10,11 @@ Vue.component('modal', {
         }
     },
     created() {
-        this.$root.$on('base::show::model', (modalDiscription)=> {
+        this.$root.$on('base::display::modal', (modalDiscription)=> {
             this.title = modalDiscription.title
             this.size = modalDiscription.size
-            this.data = modalDiscription.data
+
+            // console.log(modalDiscription.data)
             this.component = modalDiscription.component;
 
             if(modalDiscription.onsubmit){
@@ -21,7 +22,7 @@ Vue.component('modal', {
             }
 
 
-            this.$root.$emit('bv::show::modal','base::show::model' );  
+            this.$root.$emit('bv::show::modal','base::display::modal' );  
         });        
     },
     methods: {
@@ -29,14 +30,22 @@ Vue.component('modal', {
         handleOk() {
             if(this.onsubmit){
                 this.$root.$emit(this.onsubmit);  
-            }            
+            }
         },
     },
 
     template : `
     <div class="modalContainer">
-        <b-modal id="base::show::model" hide-backdrop content-class="shadow" :size=size  :title=title ok-title="Save" @ok.prevent="handleOk" scrollable>
-            <component :is="component" ref="a" :data=data ></component>
+        <b-modal
+            id="base::display::modal" 
+            hide-backdrop content-class="shadow" 
+            :size=size  
+            :title=title 
+            ok-title="Save" 
+            @ok="handleOk" 
+            scrollable
+        >
+            <component :is="component" :data=data ></component>
         </b-modal>
     </div>`
 });
