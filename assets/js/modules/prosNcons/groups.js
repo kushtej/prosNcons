@@ -71,19 +71,28 @@ Vue.component("groups", {
     },
 	template:
 	`
-    <div>
-        <div class="row">
-            <div class="col-sm-4">
-                <b-form-select class="form-select" v-model="groupName" :options="options"></b-form-select>
+        <div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <b-form-select class="form-select" v-model="groupName" :options="options"></b-form-select>
+                        </div>
+                        <div class="col-sm-1 text-center">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <button style="float:right" type="button" @click="addGroup()" class="btn"><i
+                            class="far fa-cog"></i></button>
+                    <button style="float:left" v-if="groupName" type="button" @click="removeGroup()" class="btn btn-outline-primary">-</button>
+                    <div class="text-center">
+                        <button type="button" @click="addGroup()" class="btn btn-outline-primary">+ Add Groups</button>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-4">
-                <button v-if="groupName" type="button" @click="removeGroup()" class="btn btn-outline-primary">-</button>
-            </div>
-            <div class="col-sm-4">
-                <button style="float:right" type="button" @click="addGroup()" class="btn btn-outline-primary">+ Add Groups</button>
-            </div>
-        </div >
-    </div >
+        </div>
    	`,
 });
 
