@@ -56,7 +56,13 @@ Vue.component("prosNcons", {
 				<div v-if="groupName">
 					<div class="p-2 border border-3">
 						<h3 class="text-center">Pros</h3>
-						<draggable v-model="prosNcons['groups'][groupName]['pros']" group="prosNcons['groups'][groupName]['pros']" @start="drag=true" @end="drag=false;updateData()">
+						<draggable 
+							v-model="prosNcons['groups'][groupName]['pros']" 
+							group="prosNcons['groups'][groupName]" 
+							@start="drag=true" 
+							@end="drag=false;
+							updateData()"
+						>
 							<div v-for="(pro, index) in prosNcons['groups'][groupName]['pros']">
 								<p class="text-left border border-3 bg-success p-1 text-white border-success">
 									{{pro.text}}
@@ -82,7 +88,12 @@ Vue.component("prosNcons", {
 				<div v-if="groupName">
                 	<div class="p-2 border border-3">
                     	<h3 class="text-center">Cons</h3>
-						<draggable v-model="prosNcons['groups'][groupName]['cons']" group="prosNcons['groups'][groupName]['cons']" @start="drag=true" @end="drag=false;updateData()">
+						<draggable 
+							v-model="prosNcons['groups'][groupName]['cons']" 
+							group="prosNcons['groups'][groupName]" 
+							@start="drag=true" 
+							@end="drag=false;updateData()"
+						>
 							<div v-for="(con, index) in prosNcons['groups'][groupName]['cons']">
 								<p class="border border-3 bg-danger p-1 text-white border-danger">
 									{{con.text}}
